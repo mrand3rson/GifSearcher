@@ -10,12 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.gifsearcher.R;
 import com.example.gifsearcher.models.GiphyApiResponse;
 import com.example.gifsearcher.models.GiphyData;
 import com.example.gifsearcher.models.SimpleCallback;
 import com.example.gifsearcher.models.api.GiphyApi;
+import com.example.gifsearcher.views.activities.MainActivity;
 import com.example.gifsearcher.views.adapters.GifTrendingListAdapter;
 
 import java.util.ArrayList;
@@ -41,14 +43,18 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
-        mRecycler = (RecyclerView) v.findViewById(R.id.recycler);
+        mRecycler = v.findViewById(R.id.recycler);
 
-        GiphyApi.trending(new SimpleCallback<GiphyApiResponse>() {
-            @Override
-            public void process(GiphyApiResponse response) {
-                initRecycler(response.data);
-            }
-        });
+        if (((MainActivity)getActivity()).isNetworkAvailable()) {
+            GiphyApi.trending(new SimpleCallback<GiphyApiResponse>() {
+                @Override
+                public void process(GiphyApiResponse response) {
+                    initRecycler(response.data);
+                }
+            });
+        } else {
+            Toast.makeText(getActivity(), "Network is unavailable", Toast.LENGTH_SHORT).show();
+        }
         return v;
     }
 

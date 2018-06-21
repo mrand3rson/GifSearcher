@@ -1,5 +1,7 @@
 package com.example.gifsearcher.views.activities;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -102,5 +104,12 @@ public class MainActivity extends AppCompatActivity {
             return TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
         }
         return 0;
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+
+        return info != null && info.isConnectedOrConnecting();
     }
 }
