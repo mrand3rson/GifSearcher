@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="item"
+            type="com.example.gifsearcher.models.GiphyData"/>
+    </data>
+
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="@dimen/cardview_width_100"-->
+        <!--android:layout_height="wrap_content">-->
+
+    <LinearLayout
+        android:id="@+id/imageViewHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+        <!--android:gravity="center_horizontal"-->
+        <!--android:orientation="vertical">-->
+
+        <com.felipecsl.gifimageview.library.GifImageView
+            android:id="@+id/image"
+            imageResource="@{item.images.fixedWidthGif.url}"
+            android:layout_width="@dimen/image_fixed_width"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxHeight="@dimen/image_max_height"
+            android:minHeight="@dimen/image_min_height" />
+        <!--android:layout_weight="3"-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="start"-->
+        <!--android:paddingEnd="8dp"-->
+        <!--android:paddingStart="8dp"-->
+        <!--android:text="@{item.title}"-->
+        <!--android:textSize="@dimen/item_title_text_size" />-->
+        <!--android:layout_weight="1"-->
+
+    </LinearLayout>
+    <!--</android.support.v7.widget.CardView>-->
+</layout>
